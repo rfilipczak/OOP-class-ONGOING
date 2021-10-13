@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <ctype.h>
+#include <string.h>
 
 #include "./iohelp.h"
 
@@ -8,46 +9,22 @@
 // IO HELPER FUNCTIONS
 //
 
+static int streq(const char *a, const char *b)
+{
+    return (strcmp(a, b) == 0);
+}
+
 prog_option_t iohelp_str_to_prog_option(const char *str)
 {
     assert(str != NULL);
 
-    static const char *const prog_options[] = {
-        "help",
-        "test",
-        "factorial",
-        "primes",
-        "list",
-        NULL
-    };
+    // TODO: this could potentially be written with just one iteration over str
 
-    static const int prog_options_len[] = {
-        4, /* help */
-        4, /* test */
-        9, /* factorial */
-        6, /* primes */
-        4  /* list */
-    };
-
-    int matched_chars[] = {
-        0, /* help */
-        0, /* test */
-        0, /* factorial */
-        0, /* primes */
-        0  /* list */
-    };
-
-
-    for (int i = 0; str[i] != '\0'; ++i)
-    {
-        for (int j = 0; j < 5; ++j)
-            if (str[i] == prog_options[j][i])
-                matched_chars[j] += 1;
-    }
-
-    for (int i = 0; i < 5; ++i)
-        if (matched_chars[i] == prog_options_len[i])
-            return (prog_option_t) i;
+    if (streq(str, "help"))         return OPT_HELP;
+    if (streq(str, "test"))         return OPT_TEST;
+    if (streq(str, "factorial"))    return OPT_FACTORIAL;
+    if (streq(str, "primes"))       return OPT_PRIMES;
+    if (streq(str, "list"))         return OPT_LIST;
 
     return OPT_UNKNOWN;
 }

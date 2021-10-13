@@ -14,8 +14,7 @@ typedef enum prog_option_t {
     OPT_UNKNOWN
 } prog_option_t;
 
-// This will match program argument with enumerated type in just one iteration over the str
-// So that there is no need to constatly call strcmp()
+// Match program argument with enumerated type
 prog_option_t iohelp_str_to_prog_option(const char *str);
 
 // clears stdin, i.e reads and discards characters in stdin until '\n' (inclusive).

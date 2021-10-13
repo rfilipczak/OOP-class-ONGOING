@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
     prog_option_t option_type = iohelp_str_to_prog_option(option_str);
 
     // options other than test and help require additional arguments
-    if (option_type > OPT_TEST && argc < 3)
+    if (option_type != OPT_UNKNOWN && option_type > OPT_TEST && argc < 3)
     {
         fprintf(stderr, "Too few arguments\n");
         print_usage(prog_name);
