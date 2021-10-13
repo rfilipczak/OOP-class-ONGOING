@@ -29,7 +29,7 @@ prog_option_t iohelp_str_to_prog_option(const char *str)
         4  /* list */
     };
 
-    int numberOfMatchedChars[] = {
+    int matched_chars[] = {
         0, /* help */
         0, /* test */
         0, /* factorial */
@@ -42,11 +42,11 @@ prog_option_t iohelp_str_to_prog_option(const char *str)
     {
         for (int j = 0; j < 5; ++j)
             if (str[i] == prog_options[j][i])
-                numberOfMatchedChars[j] += 1;
+                matched_chars[j] += 1;
     }
 
     for (int i = 0; i < 5; ++i)
-        if (numberOfMatchedChars[i] == prog_options_len[i])
+        if (matched_chars[i] == prog_options_len[i])
             return (prog_option_t) i;
 
     return OPT_UNKNOWN;
