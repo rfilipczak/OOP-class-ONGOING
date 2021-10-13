@@ -9,6 +9,8 @@
 * gcc 10.3.0
 * Ubuntu 21.04
 
+(but should compile on most systems and compilers)
+
 ## Quick Start
 
 ```console
