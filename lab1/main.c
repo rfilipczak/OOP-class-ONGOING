@@ -127,13 +127,15 @@ int main(int argc, char *argv[])
             const char *arg = iohelp_getarg(&argv);
             long value = strtol(arg, &endptr, 10);
 
-            if (errno != 0) {
+            if (errno != 0)
+            {
                 perror("strtol");
                 print_usage(prog_name);
                 exit(EXIT_FAILURE);
             }
 
-            if (endptr == arg) {
+            if (endptr == arg)
+            {
                 fprintf(stderr, "Factorial argument should be a number between 0 and 20\n");
                 print_usage(prog_name);
                 exit(EXIT_FAILURE);
@@ -154,13 +156,15 @@ int main(int argc, char *argv[])
             const char *arg = iohelp_getarg(&argv);
             long value = strtol(arg, &endptr, 10);
 
-            if (errno != 0) {
+            if (errno != 0)
+            {
                 perror("strtol");
                 print_usage(prog_name);
                 exit(EXIT_FAILURE);
             }
 
-            if (endptr == arg) {
+            if (endptr == arg)
+            {
                 fprintf(stderr, "Primes argument should be a number between 1 and 10000\n");
                 print_usage(prog_name);
                 exit(EXIT_FAILURE);
@@ -189,14 +193,16 @@ int main(int argc, char *argv[])
                 arg = iohelp_getarg(&argv);
                 val = strtol(arg, &endptr, 10);
 
-                if (errno != 0) {
+                if (errno != 0)
+                {
                     perror("strtol");
                     print_usage(prog_name);
                     array_destroy(values);
                     exit(EXIT_FAILURE);
                 }
 
-                if (endptr == arg) {
+                if (endptr == arg)
+                {
                     fprintf(stderr, "List argument should be a number between -2147483648 and +2147483647\n");
                     print_usage(prog_name);
                     array_destroy(values);
