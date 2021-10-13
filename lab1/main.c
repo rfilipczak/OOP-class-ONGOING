@@ -271,7 +271,7 @@ int is_prime(int n)
 
 void print_n_first_primes(int n)
 {
-    assert(n > 0 && "n should be >= 0");
+    assert(n > 0 && "n should be > 0");
     int count = 0;
     int i = 0;
     while (count != n) {
