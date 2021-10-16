@@ -1,6 +1,6 @@
 PROGNAME = ./prog
 CC = g++
-CFLAGS = -std=c++2a -pedantic -Wall -Wextra
+CFLAGS = -std=c++17 -pedantic -Wall -Wextra
 SRC = ./main.cpp
 
 all: $(SRC)
