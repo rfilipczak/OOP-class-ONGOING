@@ -30,6 +30,11 @@ private:
     Node *m_head{ nullptr };
     Node *m_tail{ nullptr };
 
+    bool is_empty() const
+    {
+        return (m_head == nullptr && m_tail == nullptr);
+    }
+
     void push_back(Node *node)
     {
         if (is_empty())
@@ -43,11 +48,6 @@ private:
             node->prev = m_tail;
             m_tail = node;
         }
-    }
-
-    bool is_empty() const
-    {
-        return (m_head == nullptr && m_tail == nullptr);
     }
 
     Node *find(const T& id) const
