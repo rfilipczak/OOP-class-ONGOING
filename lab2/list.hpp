@@ -45,12 +45,10 @@ private:
         }
     }
 
-
     bool is_empty() const
     {
         return (m_head == nullptr && m_tail == nullptr);
     }
-
 
     Node *find(const T& id) const
     {
@@ -115,7 +113,6 @@ public:
             } while (node != nullptr);
         }
     }
-
 
     void remove(const T& id)
     {
