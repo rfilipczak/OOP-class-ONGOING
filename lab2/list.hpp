@@ -38,6 +38,8 @@ private:
 
     void push_back(Node *node)
     {
+        assert(node != nullptr);
+        
         if (is_empty())
         {
             m_head = node;
