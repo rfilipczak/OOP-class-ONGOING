@@ -30,10 +30,11 @@ private:
 
     Node *m_head{ nullptr };
     Node *m_tail{ nullptr };
+    int m_length{ 0 };
 
     bool is_empty() const
     {
-        return (m_head == nullptr && m_tail == nullptr);
+        return (m_length == 0);
     }
 
     void push_back(Node *node)
@@ -87,20 +88,6 @@ private:
         return result;
     }
 
-    int length()
-    {
-        if (is_empty())
-            return 0;
-        int count = 0;
-        Node *node = m_head;
-        do {
-            ++count;
-            node = node->next;
-        } while (node);
-
-        return count;
-    }
-
     Node *get_node_at(int index)
     {
         if (is_empty())
@@ -127,12 +114,12 @@ private:
 
 public:
     List()
-        : m_head{nullptr}, m_tail{nullptr}
+        : m_head{nullptr}, m_tail{nullptr}, m_length{0}
     {
     }
 
     List(std::initializer_list<T> li)
-        : m_head{nullptr}, m_tail{nullptr}
+        : m_head{nullptr}, m_tail{nullptr}, m_length{static_cast<int>(li.size())}
     {
         for (const auto& id : li)
         {
@@ -171,6 +158,7 @@ public:
             {
                 delete m_head;
                 m_head = m_tail = nullptr;
+                --m_length;
             }
             else
             {
@@ -180,6 +168,7 @@ public:
         else
         {
             // more nodes in the list
+
             if (Node *node = find(id); node != nullptr)
             {
                 if (node == m_head)
@@ -200,6 +189,7 @@ public:
                     node->next->prev = node->prev;
                     delete node;
                 }
+                --m_length;
             }
             else
             {
@@ -215,6 +205,7 @@ public:
     {
         Node *node = new Node(id);
         push_back(node);
+        ++m_length;
         return node;
     }
 
@@ -255,6 +246,8 @@ public:
                 push_back(node);
             }
         }
+
+        ++m_length;
     }
 
     const List& sort()
@@ -265,7 +258,7 @@ public:
         if (is_empty())
             return *this;
         
-        int len = length();
+        int len = m_length;
         
         for (int i = 0; i < len - 1; ++i)
         {
