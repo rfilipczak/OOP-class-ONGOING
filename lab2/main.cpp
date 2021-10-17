@@ -46,6 +46,8 @@ int main()
 
     list.remove(123);
     std::cout << list << '\n';
-    
+
+    std::cout << list.sort() << '\n';
+
     return 0;
 }

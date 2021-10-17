@@ -84,6 +84,44 @@ private:
         return result;
     }
 
+    int length()
+    {
+        if (is_empty())
+            return 0;
+        int count = 0;
+        Node *node = m_head;
+        do {
+            ++count;
+            node = node->next;
+        } while (node);
+
+        return count;
+    }
+
+    Node *get_node_at(int index)
+    {
+        if (is_empty())
+            return nullptr;
+        
+        Node *node = m_head;
+        int current_index = 0;
+        do {
+            if (current_index == index)
+                return node;
+            ++current_index;
+            node = node->next;
+        } while (node != nullptr);
+
+        return nullptr;
+    }
+
+    void swap(Node *a, Node *b)
+    {
+        auto tmp = a->id;
+        a->id = b->id;
+        b->id = tmp;
+    }
+
 public:
     List()
         : m_head{nullptr}, m_tail{nullptr}
@@ -114,6 +152,7 @@ public:
         }
     }
 
+    // TODO: return type
     void remove(const T& id)
     {
         if (is_empty())
@@ -206,6 +245,30 @@ public:
         }
     }
 
+    const List& sort()
+    {
+
+        // TODO: ridiculously bad time complexity
+
+        if (is_empty())
+            return *this;
+        
+        int len = length();
+        
+        for (int i = 0; i < len - 1; ++i)
+        {
+            for (int j = 0; j < len - i - 1; ++j)
+            {
+                Node *a = get_node_at(j);
+                Node *b = get_node_at(j+1);
+                if (a->id > b->id)
+                    swap(a, b);
+            }
+        }
+
+        return *this;
+    }
+
     friend std::ostream& operator<<(std::ostream& out, const List& list)
     {
         Node *node;
@@ -215,7 +278,7 @@ public:
             do {
                 out << node;
                 node = node->next;
-                if (node != nullptr) // same check as the loop itself, maybe refactor the loop
+                if (node != nullptr) // TODO: same check as the loop itself, maybe refactor the loop
                     out << "<->";
             } while (node != nullptr);
         }
