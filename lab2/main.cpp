@@ -49,5 +49,20 @@ int main()
 
     std::cout << list.sort() << '\n';
 
+    list.insert_after(5, -321);
+    list.insert_after(0, 123);
+    list.insert_after(0, -3213213);
+
+    std::cout << list << '\n';
+    std::cout << list.sort() << '\n';
+
+    list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
+
+    std::cout << list << '\n';
+    std::cout << list.sort() << '\n';
+
     return 0;
 }

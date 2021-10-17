@@ -3,6 +3,7 @@
 
 #include <initializer_list>
 #include <iostream>
+#include <cassert>
 
 
 template <typename T>
@@ -152,9 +153,11 @@ public:
         }
     }
 
-    // TODO: return type
     void remove(const T& id)
     {
+        // TODO: return type
+        // TODO: simplify
+
         if (is_empty())
         {
             // possible early return
@@ -204,6 +207,13 @@ public:
         
         // node with id not found
         return;
+    }
+
+    Node* push_back(const T& id)
+    {
+        Node *node = new Node(id);
+        push_back(node);
+        return node;
     }
 
     void insert_after(const T& id, const T& new_id)
@@ -261,6 +271,10 @@ public:
             {
                 Node *a = get_node_at(j);
                 Node *b = get_node_at(j+1);
+
+                assert(a != nullptr);
+                assert(b != nullptr);
+
                 if (a->id > b->id)
                     swap(a, b);
             }
@@ -271,10 +285,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const List& list)
     {
-        Node *node;
         if (!list.is_empty())
         {
-            node = list.m_head;
+            Node *node = list.m_head;
             do {
                 out << node;
                 node = node->next;
