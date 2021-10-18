@@ -12,7 +12,7 @@ class List
 private:
     struct Node
     {
-        T id;
+        T id{};
         Node *prev{ nullptr };
         Node *next{ nullptr };
 
@@ -52,6 +52,20 @@ private:
             node->prev = m_tail;
             m_tail = node;
         }
+        ++m_length;
+    }
+    
+    void push_between(Node *prev, Node *node, Node *next)
+    {
+        assert(prev != nullptr);
+        assert(node != nullptr);
+        assert(next != nullptr);
+
+        node->prev = prev;
+        node->next = next;
+        prev->next = node;
+        next->prev = node;
+        ++m_length;
     }
 
     Node *find(const T& id) const
@@ -85,7 +99,7 @@ private:
             } while (!found && node != nullptr);
         }
 
-        return result;
+        return result; // found node in the list or nullptr
     }
 
     Node *get_node_at(int index)
@@ -105,7 +119,7 @@ private:
         return nullptr;
     }
 
-    void swap(Node *a, Node *b)
+    void swap_id(Node *a, Node *b)
     {
         auto tmp = a->id;
         a->id = b->id;
@@ -113,13 +127,8 @@ private:
     }
 
 public:
-    List()
-        : m_head{nullptr}, m_tail{nullptr}, m_length{0}
-    {
-    }
-
     List(std::initializer_list<T> li)
-        : m_head{nullptr}, m_tail{nullptr}, m_length{static_cast<int>(li.size())}
+        : m_head{nullptr}, m_tail{nullptr}
     {
         for (const auto& id : li)
         {
@@ -144,7 +153,7 @@ public:
 
     void remove(const T& id)
     {
-        // TODO: return type
+        // TODO: maybe some return?
         // TODO: simplify
 
         if (is_empty())
@@ -201,31 +210,32 @@ public:
         return;
     }
 
-    Node* push_back(const T& id)
+    const Node* push_back(const T& id)
     {
         Node *node = new Node(id);
         push_back(node);
-        ++m_length;
         return node;
     }
 
-    void insert_after(const T& id, const T& new_id)
+    const Node* insert_after(const T& id, const T& new_id)
     {
+        // TODO: simplify
+
         Node *node = new Node(new_id);
 
         if (is_empty())
         {
-            m_head = node;
-            m_tail = node;
+            push_back(node);
         }
         else if (m_head == m_tail)
         {
-            // 1 node in the list
+            // 1 node in the list  
             push_back(node);
         }
         else
         {
             // more nodes in the list
+
             if (Node *found = find(id); found != nullptr)
             {
                 if (found == m_tail)
@@ -234,10 +244,7 @@ public:
                 }
                 else
                 {
-                    node->prev = found;
-                    node->next = found->next;
-                    found->next = node;
-                    node->next->prev = node;
+                    push_between(found, node, found->next);
                 }
             }
             else
@@ -247,13 +254,16 @@ public:
             }
         }
 
-        ++m_length;
+        return node;
     }
 
     const List& sort()
     {
 
         // TODO: ridiculously bad time complexity
+        //
+        // hacked "standard" bubble sort for arrays into linked list with get_node_at() 
+        // which iterates over the list every inner loop
 
         if (is_empty())
             return *this;
@@ -265,13 +275,13 @@ public:
             for (int j = 0; j < len - i - 1; ++j)
             {
                 Node *a = get_node_at(j);
-                Node *b = get_node_at(j+1);
+                Node *b = a->next;
 
                 assert(a != nullptr);
                 assert(b != nullptr);
 
                 if (a->id > b->id)
-                    swap(a, b);
+                    swap_id(a, b);
             }
         }
 

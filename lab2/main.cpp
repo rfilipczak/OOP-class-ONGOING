@@ -24,46 +24,46 @@ int main()
     // std::cout << a << " * " << b << " = " << a * b << '\n';
     // std::cout << a << " / " << b << " = " << a / b << '\n';
 
-    // List<int> list{1, 5, 7, -1};
-    // std::cout << list << '\n';
+    List<int> list{1, 5, 7, -1};
+    std::cout << list << '\n';
 
-    // list.insert_after(1, 13);
-    // std::cout << list << '\n';
+    list.insert_after(1, 13);
+    std::cout << list << '\n';
 
-    // list.insert_after(13, 15);
-    // std::cout << list << '\n';
+    list.insert_after(13, 15);
+    std::cout << list << '\n';
 
-    // list.insert_after(-1, 123);
-    // std::cout << list << '\n';
+    list.insert_after(-1, 123);
+    std::cout << list << '\n';
 
-    // list.remove(1);
-    // std::cout << list << '\n';
+    list.remove(1);
+    std::cout << list << '\n';
 
-    // list.remove(13);
-    // std::cout << list << '\n';
+    list.remove(13);
+    std::cout << list << '\n';
 
-    // list.remove(7);
-    // std::cout << list << '\n';
+    list.remove(7);
+    std::cout << list << '\n';
 
-    // list.remove(123);
-    // std::cout << list << '\n';
+    list.remove(123);
+    std::cout << list << '\n';
 
-    // std::cout << list.sort() << '\n';
+    std::cout << list.sort() << '\n';
 
-    // list.insert_after(5, -321);
-    // list.insert_after(0, 123);
-    // list.insert_after(0, -3213213);
+    list.insert_after(5, -321);
+    list.insert_after(0, 123);
+    list.insert_after(0, -3213213);
 
-    // std::cout << list << '\n';
-    // std::cout << list.sort() << '\n';
+    std::cout << list << '\n';
+    std::cout << list.sort() << '\n';
 
-    // list.push_back(3);
-    // list.push_back(3);
-    // list.push_back(3);
-    // list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
 
-    // std::cout << list << '\n';
-    // std::cout << list.sort() << '\n';
+    std::cout << list << '\n';
+    std::cout << list.sort() << '\n';
 
 
     PersonalDataBank bank{};
