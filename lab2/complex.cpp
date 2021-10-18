@@ -2,6 +2,7 @@
 #include <string_view>
 #include <string>
 #include <sstream>
+#include <array>
 
 #include "./complex.hpp"
 
@@ -66,36 +67,24 @@ int main(int argc, char *argv[])
     Complex a;
     Complex b;
 
-    double real, imag;
     std::istringstream iss{ std::string{ c1 } };
-    char c;
-    iss >> real;
-    iss >> c;
-    iss >> imag;
-    if (iss && c == '+')
-    {
-        a = Complex{real, imag};
-    }
-    else
+    iss >> a;
+    if (!iss.good())
     {
         std::cerr << "Invalid complex format: " << c1 << '\n';
         print_usage();
-    }
-
-    iss = std::istringstream(std::string{c2});
-    iss >> real;
-    iss >> c;
-    iss >> imag;
-    if (iss && c == '+')
-    {
-        b = Complex{real, imag};
-    }
-    else
-    {
-        std::cerr << "Invalid complex format: " << c1 << '\n';
-        print_usage();
+        std::exit(EXIT_FAILURE);
     }
     
+    iss = std::istringstream(std::string{c2});
+    iss >> b;
+    if (!iss.good())
+    {
+        std::cerr << "Invalid complex format: " << c2 << '\n';
+        print_usage();
+        std::exit(EXIT_FAILURE);
+    }
+
     switch (opt)
     {
     case OP_T::ADD:
@@ -123,7 +112,7 @@ int main(int argc, char *argv[])
 
 void print_usage()
 {
-    static constexpr std::string_view usage[] = {
+    static constexpr std::array usage = {
         "Usage:",
         "./complex [OP] [Complex1] [Complex2],",
         "   where OP is one of: add, sub, mul, div",
