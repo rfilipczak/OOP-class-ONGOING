@@ -29,6 +29,19 @@ OP_T sv_to_opt(std::string_view sv)
     return OP_T::UNKNOWN;
 }
 
+OP_T ch_to_opt(char c)
+{
+    if (c == '+')
+        return OP_T::ADD;
+    if (c == '-')
+        return OP_T::SUB;
+    if (c == '*')
+        return OP_T::MUL;
+    if (c == '/')
+        return OP_T::DIV;
+    return OP_T::UNKNOWN;
+}
+
 char opt_to_char(OP_T op)
 {
     if (op == OP_T::ADD)
@@ -49,7 +62,7 @@ int main(int argc, char *argv[])
     ++argv;
 
     int result = 0;
-    constexpr int required_argc = 3;
+    constexpr int required_argc = 1;
 
     if (argc != required_argc)
     {
@@ -58,29 +71,17 @@ int main(int argc, char *argv[])
         std::exit(EXIT_FAILURE);
     }
 
-
-    std::string_view op{ *argv++ };
-    std::string_view c1{ *argv++ };
-    std::string_view c2{ *argv++ };
-
-    OP_T opt = sv_to_opt(op);
+    OP_T opt;
     Complex a;
     Complex b;
+    char op;
 
-    std::istringstream iss{ std::string{ c1 } };
-    iss >> a;
-    if (!iss.good())
+    std::istringstream iss{ *argv };
+    iss >> a >> op >> b;
+    opt = ch_to_opt(op);
+    if (!iss || opt == OP_T::UNKNOWN)
     {
-        std::cerr << "Invalid complex format: " << c1 << '\n';
-        print_usage();
-        std::exit(EXIT_FAILURE);
-    }
-    
-    iss = std::istringstream(std::string{c2});
-    iss >> b;
-    if (!iss.good())
-    {
-        std::cerr << "Invalid complex format: " << c2 << '\n';
+        std::cerr << "Incorrect expression: " << *argv << '\n';
         print_usage();
         std::exit(EXIT_FAILURE);
     }
@@ -114,12 +115,12 @@ void print_usage()
 {
     static constexpr std::array usage = {
         "Usage:",
-        "./complex [OP] [Complex1] [Complex2],",
-        "   where OP is one of: add, sub, mul, div",
+        "./complex \"[Complex1] [OP] [Complex2]\"",
+        "   where OP is one of: +, -, *, /",
         "   and complex is in format RE+IMGj",
         "Example:",
-        "   $ ./complex mul 23+2j -12+-3j",
-        "   Complex{23 + 2i} * Complex{-12 + -3i} = Complex{-270 + -93i}"
+        "   $ ./complex \"23+2j * -12+-3j\"",
+        "   Complex{23 + 2j} * Complex{-12 + -3j} = Complex{-270 + -93j}"
     };
 
     for (auto line : usage)
