@@ -3,7 +3,10 @@
 
 #include <initializer_list>
 #include <iostream>
+#include <fstream>
 #include <cassert>
+#include <sstream>
+#include <vector>
 
 
 template <typename T>
@@ -136,6 +139,31 @@ public:
         : m_head{nullptr}, m_tail{nullptr}
     {
         for (const auto& id : li)
+        {
+            Node *node = new Node(id);
+            push_back(node);
+        }
+    }
+
+    List(std::ifstream& ifile)
+    {
+        std::vector<T> values{};
+        std::string line;
+        while (std::getline(ifile, line))
+        {
+            std::istringstream iss{ line };
+            while (!iss.eof())
+            {
+                std::string tmp;
+                iss >> tmp;
+                T id;
+                if (std::istringstream{tmp} >> id)
+                {
+                    values.emplace_back(id);
+                }
+            }
+        }
+        for (const auto& id : values)
         {
             Node *node = new Node(id);
             push_back(node);

@@ -65,6 +65,10 @@ int main()
     // std::cout << list << '\n';
     // std::cout << list.sort() << '\n';
 
+    std::ifstream ifile{ "./testlist.txt" };
+    List<int> list{ ifile };
+    std::cout << list << '\n';
+
 
     // PersonalDataBank bank{};
     // bank.add("Rafal", "Filipczak", "Zurawia 8/60 91-463 Lodz", "93042305017");
@@ -80,14 +84,14 @@ int main()
     // bank.add("sdasd", "Asddasdasasd", "asddas", "asdasd");
     // std::cout << bank << '\n';
 
-    std::ifstream ifile{ "./test.txt" };
-    PersonalDataBank bank{ ifile };
-    std::cout << bank << '\n';
+    // std::ifstream ifile{ "./test.txt" };
+    // PersonalDataBank bank{ ifile };
+    // std::cout << bank << '\n';
 
-    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
-    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
-    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
-    std::cout << bank << '\n';
+    // bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    // bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    // bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    // std::cout << bank << '\n';
 
     return 0;
 }
