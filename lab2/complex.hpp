@@ -22,7 +22,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Complex& c)
     {
-        out << "Complex{" << c.m_real << " + " << c.m_imag << "i}";
+        out << "Complex{" << c.m_real << " + " << c.m_imag << "j}";
         return out;
     }
 
