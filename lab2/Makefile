@@ -6,3 +6,6 @@ SRC = ./main.cpp
 all: $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(PROGNAME)
 
+complex: ./complex.cpp
+	$(CC) $(CFLAGS) ./complex.cpp -o ./complex
+
