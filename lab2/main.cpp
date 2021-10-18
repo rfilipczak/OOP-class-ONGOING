@@ -68,7 +68,6 @@ int main()
     std::ifstream ifile{ "./testlist.txt" };
     List<int> list{ ifile };
     std::cout << list << '\n';
-    std::cout << list.clear() << '\n';
 
 
     // PersonalDataBank bank{};
