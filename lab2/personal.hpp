@@ -13,7 +13,6 @@
 class PersonalDataBank
 {
 private:
-
     struct PersonalData
     {
         std::string m_name{};
@@ -32,7 +31,6 @@ private:
             return out;
         }
     };
-
 
     std::vector<const PersonalData *> m_data{};
 
