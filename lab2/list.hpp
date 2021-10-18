@@ -321,8 +321,27 @@ public:
         return *this;
     }
 
+    const List& clear()
+    {
+        if (!is_empty())
+        {
+            Node *node = m_head;
+            Node *next = nullptr;
+            do {
+                next = node->next;
+                delete node;
+                node = next;
+            } while (node != nullptr);
+        }
+        m_head = nullptr;
+        m_tail = nullptr;
+        m_length = 0;
+        return *this;
+    }
+
     friend std::ostream& operator<<(std::ostream& out, const List& list)
     {
+        out << "List{";
         if (!list.is_empty())
         {
             Node *node = list.m_head;
@@ -333,6 +352,7 @@ public:
                     out << "<->";
             } while (node != nullptr);
         }
+        out << '}';
         return out;
     }
 };
