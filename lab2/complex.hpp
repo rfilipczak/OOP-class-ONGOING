@@ -26,6 +26,33 @@ public:
         return out;
     }
 
+    friend std::istream& operator>>(std::istream& in, Complex& c)
+    {
+        double real, imag;
+        char tmp;
+        in >> real;
+        in >> tmp;
+        if (tmp == '+')
+        {
+            in >> imag;
+            in >> tmp;
+            if (tmp == 'j')
+            {
+                c.m_real = real;
+                c.m_imag = imag;
+            }
+            else
+            {
+                in.setstate(std::ios_base::failbit);
+            }
+        }
+        else
+        {
+            in.setstate(std::ios_base::failbit);
+        }
+        return in;
+    }
+
     friend Complex operator+(const Complex& a, const Complex& b)
     {
         return Complex(a.m_real + b.m_real, a.m_imag + b.m_imag);
