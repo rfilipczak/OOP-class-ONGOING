@@ -84,5 +84,10 @@ int main()
     PersonalDataBank bank{ ifile };
     std::cout << bank << '\n';
 
+    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    bank.add("ASdda", "ASDsad", "saddsa", "asdasd");
+    std::cout << bank << '\n';
+
     return 0;
 }

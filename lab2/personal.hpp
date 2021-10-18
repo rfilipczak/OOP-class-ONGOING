@@ -38,12 +38,9 @@ private:
 
     auto find(std::string_view pesel) const
     {
-        for (auto person = m_data.cbegin(); person != m_data.cend(); ++person)
-        {
-            if (pesel.compare((*person)->m_pesel) == 0)
-                return person;
-        }
-        return m_data.cend();
+        return std::find_if(m_data.cbegin(), m_data.cend(), [pesel](const auto* person){
+            return (pesel.compare(person->m_pesel) == 0);
+        });
     }
 
 public:
