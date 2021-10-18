@@ -104,6 +104,8 @@ private:
 
     Node *get_node_at(int index)
     {
+        assert(index >= 0);
+
         if (is_empty())
             return nullptr;
         
@@ -121,6 +123,9 @@ private:
 
     void swap_id(Node *a, Node *b)
     {
+        assert(a != nullptr);
+        assert(b != nullptr);
+        
         auto tmp = a->id;
         a->id = b->id;
         b->id = tmp;
