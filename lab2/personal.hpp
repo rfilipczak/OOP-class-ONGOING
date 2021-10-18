@@ -14,10 +14,10 @@ private:
 
     struct PersonalData
     {
-        std::string m_name;
-        std::string m_lastname;
-        std::string m_address;
-        std::string m_pesel;
+        std::string m_name{};
+        std::string m_lastname{};
+        std::string m_address{};
+        std::string m_pesel{};
 
         PersonalData(std::string_view name, std::string_view lastname, std::string_view address, std::string_view pesel)
             : m_name{ name }, m_lastname{ lastname }, m_address{ address }, m_pesel{ pesel }
@@ -32,7 +32,7 @@ private:
     };
 
 
-    std::vector<const PersonalData *> m_data;
+    std::vector<const PersonalData *> m_data{};
 
     auto find(std::string_view pesel) const
     {
