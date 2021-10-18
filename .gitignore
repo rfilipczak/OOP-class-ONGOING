@@ -1,6 +1,4 @@
 .vscode/
 **/prog
 **/*.txt
-**/complex
-**/list
-**/personaldata
+
