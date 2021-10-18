@@ -6,6 +6,8 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 
 class PersonalDataBank
@@ -52,6 +54,30 @@ public:
         for (const PersonalData *person : li)
         {
             m_data.emplace_back(person);
+        }
+    }
+
+    PersonalDataBank(std::ifstream& ifile)
+    {
+        std::string name;
+        std::string lastname;
+        std::string address;
+        std::string pesel;
+
+        std::string line;
+        while (std::getline(ifile, line))
+        {
+            std::istringstream iss{ line };
+
+            std::getline(iss, name, ',');
+            std::getline(iss, lastname, ',');
+            std::getline(iss, address, ',');
+            std::getline(iss, pesel);
+
+            if (iss)
+            {
+                add(name, lastname, address, pesel);
+            }
         }
     }
 
