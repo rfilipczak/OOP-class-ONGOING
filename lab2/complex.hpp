@@ -29,14 +29,15 @@ public:
     friend std::istream& operator>>(std::istream& in, Complex& c)
     {
         double real, imag;
-        char tmp;
+        char ch;
+        std::string end;
         in >> real;
-        in >> tmp;
-        if (tmp == '+')
+        in >> ch;
+        if (ch == '+')
         {
             in >> imag;
-            in >> tmp;
-            if (tmp == 'j')
+            in >> end;
+            if (end == "j")
             {
                 c.m_real = real;
                 c.m_imag = imag;
