@@ -2,4 +2,4 @@
 
 ## Requirements
 
-* C++ compiler with at least C++17 capabilities
+* C++ compiler with C++20 capabilities
