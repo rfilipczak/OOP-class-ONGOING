@@ -1,4 +1,6 @@
 .vscode/
 **/prog
 **/*.txt
+**/progcomplex
+**/main.cpp
 
