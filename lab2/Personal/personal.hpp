@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <regex>
 
 
 class PersonalDataBank
@@ -41,6 +42,12 @@ private:
         });
     }
 
+    static bool validatePesel(const std::string& pesel)
+    {
+        static const std::regex regex{ "^[0-9]{11}$" };
+        return std::regex_match(pesel, regex);
+    }
+
 public:
     PersonalDataBank() = default;
 
@@ -64,12 +71,12 @@ public:
         {
             std::istringstream iss{ line };
 
-            std::getline(iss, name, ',');
-            std::getline(iss, lastname, ',');
-            std::getline(iss, address, ',');
-            std::getline(iss, pesel);
+            std::getline(iss >> std::ws, name, ',');
+            std::getline(iss >> std::ws, lastname, ',');
+            std::getline(iss >> std::ws, address, ',');
+            std::getline(iss >> std::ws, pesel);
 
-            if (iss)
+            if (iss && validatePesel(pesel))
             {
                 add(name, lastname, address, pesel);
             }
