@@ -1,8 +1,8 @@
 .vscode/
 **/prog
-**/*.txt
 **/progcomplex
 **/main.cpp
 **/complex
 **/list
 **/personal
+**/test*
