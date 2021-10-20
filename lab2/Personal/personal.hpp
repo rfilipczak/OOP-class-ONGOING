@@ -91,22 +91,58 @@ public:
         }
     }
 
-    void add(std::string_view name, std::string_view lastname, std::string_view address, std::string_view pesel)
+    enum class AddResultType
+    {
+        Success,
+        AlreadyInBank,
+        InvalidFormat
+    };
+
+    AddResultType add(std::string_view name, std::string_view lastname, std::string_view address, std::string_view pesel)
     {
         if (find(pesel) != m_data.cend())
-            return; // pesel already in bank
+            return AddResultType::AlreadyInBank;
 
         PersonalData *person = new PersonalData(name, lastname, address, pesel);
         m_data.emplace_back(person);
+        return AddResultType::Success;
     }
 
-    void remove(std::string_view pesel)
+    AddResultType add(const std::string& line)
+    {
+        std::istringstream iss{ line };
+        std::string name;
+        std::string lastname;
+        std::string address;
+        std::string pesel;
+
+        std::getline(iss >> std::ws, name, ',');
+        std::getline(iss >> std::ws, lastname, ',');
+        std::getline(iss >> std::ws, address, ',');
+        std::getline(iss >> std::ws, pesel);
+
+        if (iss && validatePesel(pesel))
+        {
+            return add(name, lastname, address, pesel);
+        }
+        return AddResultType::InvalidFormat;
+    }
+
+    enum class RemoveResultType
+    {
+        Success,
+        PeselNotFound
+    };
+
+    RemoveResultType remove(std::string_view pesel)
     {
         if (auto found = find(pesel); found != m_data.cend())
         {
-            m_data.erase(found);
             delete *found;
+            m_data.erase(found);
+            return RemoveResultType::Success;
         }
+        return RemoveResultType::PeselNotFound;
     }
 
     friend std::ostream& operator<<(std::ostream& out, const PersonalDataBank& bank)
@@ -118,6 +154,14 @@ public:
         }
         out << '}';
         return out;
+    }
+
+    void saveToFile(std::ofstream& out)
+    {
+        for (auto person: m_data)
+        {
+            out << person->m_name << ',' << person->m_lastname << ',' << person->m_address << ',' << person->m_pesel << '\n';
+        }
     }
 };
 
