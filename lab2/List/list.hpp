@@ -350,7 +350,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const List& list)
     {
-        out << "List{";
+        out << "List{\n";
         if (!list.is_empty())
         {
             Node *node = list.m_head;
@@ -361,7 +361,7 @@ public:
                     out << "<->";
             } while (node != nullptr);
         }
-        out << '}';
+        out << "\n}";
         return out;
     }
 
