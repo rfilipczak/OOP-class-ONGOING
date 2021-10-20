@@ -106,8 +106,10 @@ int main(int argc, char *argv[])
                 }
                 else if (s == "s")
                 {
+                    std::cout << "Saving to file " << filename << "...\n";
                     std::ofstream ofile{ filename.data() };
                     bank.saveToFile(ofile);
+                    std::cout << "done.\n";
                 }
                 else
                 {
