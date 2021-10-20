@@ -12,6 +12,7 @@ Object Oriented Programming Labs
 ## Labs description
 
 * Lab1: factorial, primes, circular doubly-linked list
+* Lab2: complex numbers, linked list, personal data class
 
 ## Quick Start
 ```console
