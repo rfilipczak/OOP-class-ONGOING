@@ -135,6 +135,9 @@ private:
     }
 
 public:
+
+    using NodeIDType = T;
+
     List(std::initializer_list<T> li)
         : m_head{nullptr}, m_tail{nullptr}
     {
@@ -184,14 +187,20 @@ public:
         }
     }
 
-    void remove(const T& id)
+    enum class RemoveResultType
     {
-        // TODO: maybe some return?
+        Success,
+        NotFound
+    };
+
+    RemoveResultType remove(const T& id)
+    {
         // TODO: simplify
+        // TODO: too many returns?
 
         if (is_empty())
         {
-            // possible early return
+            return RemoveResultType::NotFound;
         }
         else if (m_head == m_tail)
         {
@@ -201,10 +210,11 @@ public:
                 delete m_head;
                 m_head = m_tail = nullptr;
                 --m_length;
+                return RemoveResultType::Success;
             }
             else
             {
-                // node with id not found
+                return RemoveResultType::NotFound;
             }
         }
         else
@@ -217,21 +227,20 @@ public:
                 {
                     node->next->prev = nullptr;
                     m_head = node->next;
-                    delete node;
                 }
                 else if (node == m_tail)
                 {
                     node->prev->next = nullptr;
                     m_tail = node->prev;
-                    delete node;
                 }
                 else
                 {
                     node->prev->next = node->next;
                     node->next->prev = node->prev;
-                    delete node;
                 }
+                delete node;
                 --m_length;
+                return RemoveResultType::Success;
             }
             else
             {
@@ -240,7 +249,7 @@ public:
         }
         
         // node with id not found
-        return;
+        return RemoveResultType::NotFound;
     }
 
     const Node* push_back(const T& id)
@@ -354,6 +363,19 @@ public:
         }
         out << '}';
         return out;
+    }
+
+    void saveToFile(std::ofstream& out)
+    {
+        if (!is_empty())
+        {
+            Node *node = m_head;
+            do {
+                out << node->id << ' ';
+                node = node->next;
+            } while (node != nullptr);
+        }
+        out << '\n';
     }
 };
 
