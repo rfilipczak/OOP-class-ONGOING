@@ -1,3 +1,7 @@
+## Requirements
+
+* g++ and stdlib with c++17 features available
+
 ## QuickStart
 
 ```console
