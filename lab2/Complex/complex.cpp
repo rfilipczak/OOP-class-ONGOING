@@ -31,10 +31,7 @@ int main(int argc, char *argv[])
 {
     --argc; ++argv; // skip progname
 
-    constexpr int required_argc = 1;
-    bool prog_failed{ false };
-
-    if (argc == required_argc)
+    if (argc == 1)
     {
         Complex a;
         Complex b;
@@ -63,26 +60,22 @@ int main(int argc, char *argv[])
             default:
                 std::cerr << "Invalid operation: " << op << '\n';
                 print_usage();
-                prog_failed = true;
-                break;
+                return 1;
             }
         }
         else
         {
             std::cerr << "Invalid expression: " << *argv << '\n';
             print_usage();
-            prog_failed = true;
+            return 1;
         }
     }
     else
     {
         std::cerr << "Invalid number of arguments\n";
         print_usage();
-        prog_failed = true;
+        return 1;
     }
 
-    if (prog_failed)
-        return 1;
-    else
-        return 0;
+    return 0;
 }
