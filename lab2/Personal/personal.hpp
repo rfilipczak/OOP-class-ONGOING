@@ -156,7 +156,7 @@ public:
         return out;
     }
 
-    void saveToFile(std::ofstream& out)
+    void saveToFile(std::ofstream& out) const
     {
         for (auto person: m_data)
         {
