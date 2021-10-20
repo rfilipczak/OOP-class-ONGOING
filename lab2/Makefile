@@ -1,6 +1,6 @@
 PROGNAME = ./prog
 CC = g++
-CFLAGS = -g -std=c++2a -pedantic -Wall -Wextra
+CFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
 
 COMPLEX_DIR = ./Complex
 LIST_DIR = ./List
