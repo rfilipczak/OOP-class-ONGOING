@@ -22,8 +22,36 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Complex& c)
     {
-        out << "Complex{" << c.m_real << " + " << c.m_imag << "i}";
+        out << "Complex{" << c.m_real << " + " << c.m_imag << "j}";
         return out;
+    }
+
+    friend std::istream& operator>>(std::istream& in, Complex& c)
+    {
+        double real, imag;
+        char ch;
+        std::string end;
+        in >> real;
+        in >> ch;
+        if (ch == '+')
+        {
+            in >> imag;
+            in >> end;
+            if (end == "j")
+            {
+                c.m_real = real;
+                c.m_imag = imag;
+            }
+            else
+            {
+                in.setstate(std::ios_base::failbit);
+            }
+        }
+        else
+        {
+            in.setstate(std::ios_base::failbit);
+        }
+        return in;
     }
 
     friend Complex operator+(const Complex& a, const Complex& b)
