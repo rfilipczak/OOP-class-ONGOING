@@ -8,7 +8,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <regex>
 
 
 class PersonalDataBank
@@ -44,8 +43,9 @@ private:
 
     static bool validatePesel(const std::string& pesel)
     {
-        static const std::regex regex{ "^[0-9]{11}$" };
-        return std::regex_match(pesel, regex);
+        return (pesel.length() == 11) && std::all_of(std::begin(pesel), std::end(pesel), [](char c)->bool{
+            return (std::isdigit(c));
+        });
     }
 
 public:
