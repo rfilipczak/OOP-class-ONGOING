@@ -6,6 +6,7 @@ Object Oriented Programming Labs
 
 * gcc 10.3.0
 * Ubuntu 21.04
+* make
 
 (but should compile on most systems and compilers)
 

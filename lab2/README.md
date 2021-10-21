@@ -1,6 +1,7 @@
 ## Requirements
 
 * g++ version with c++17 features available
+* make
 
 ## QuickStart
 
