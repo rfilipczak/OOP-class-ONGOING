@@ -187,6 +187,11 @@ public:
         }
     }
 
+    int length() const noexcept
+    {
+        return m_length;
+    }
+
     enum class RemoveResultType
     {
         Success,
@@ -298,6 +303,8 @@ public:
 
         return node;
     }
+
+    static inline constexpr int SortThreshold = 1000;
 
     const List& sort()
     {
