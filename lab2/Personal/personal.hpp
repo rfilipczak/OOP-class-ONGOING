@@ -50,6 +50,8 @@ private:
 
 public:
     PersonalDataBank() = default;
+    PersonalDataBank(const PersonalDataBank&) = delete;
+    PersonalDataBank(const PersonalDataBank&&) = delete;
 
     PersonalDataBank(const std::vector<const PersonalData *>& li)
     {
