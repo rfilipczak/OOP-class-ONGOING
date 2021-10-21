@@ -41,7 +41,7 @@ private:
         });
     }
 
-    static bool validatePesel(const std::string& pesel)
+    static bool validatePesel(std::string_view pesel)
     {
         return (pesel.length() == 11) && std::all_of(std::begin(pesel), std::end(pesel), [](char c)->bool{
             return (std::isdigit(c));
