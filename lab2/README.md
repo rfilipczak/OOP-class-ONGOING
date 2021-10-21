@@ -1,6 +1,6 @@
 ## Requirements
 
-* g++ and stdlib with c++17 features available
+* g++ version with c++17 features available
 
 ## QuickStart
 
