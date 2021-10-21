@@ -138,6 +138,10 @@ public:
 
     using NodeIDType = T;
 
+    List() = default;
+    List(const List&) = delete;
+    List(const List&&) = delete;
+
     List(std::initializer_list<T> li)
         : m_head{nullptr}, m_tail{nullptr}
     {
