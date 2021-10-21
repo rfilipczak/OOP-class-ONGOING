@@ -97,11 +97,14 @@ public:
     {
         Success,
         AlreadyInBank,
-        InvalidFormat
+        InvalidFormat,
+        InvalidPesel
     };
 
     AddResultType add(std::string_view name, std::string_view lastname, std::string_view address, std::string_view pesel)
     {
+        if (!validatePesel(pesel))
+            return AddResultType::InvalidPesel;
         if (find(pesel) != m_data.cend())
             return AddResultType::AlreadyInBank;
 
@@ -123,7 +126,7 @@ public:
         std::getline(iss >> std::ws, address, ',');
         std::getline(iss >> std::ws, pesel);
 
-        if (iss && validatePesel(pesel))
+        if (iss)
         {
             return add(name, lastname, address, pesel);
         }
@@ -133,11 +136,14 @@ public:
     enum class RemoveResultType
     {
         Success,
-        PeselNotFound
+        PeselNotFound,
+        InvalidPesel
     };
 
     RemoveResultType remove(std::string_view pesel)
     {
+        if (!validatePesel(pesel))
+            return RemoveResultType::InvalidPesel;
         if (auto found = find(pesel); found != m_data.cend())
         {
             delete *found;

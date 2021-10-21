@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
                             std::cerr << "Invalid format\n";
                         else if (result == Result::AlreadyInBank)
                             std::cerr << "Pesel already in the bank\n";
+                        else if (result == Result::InvalidPesel)
+                            std::cerr << "Invalid pesel format\n";
                         else
                             std::cerr << "Unexpected error\n";
                     }
@@ -100,6 +102,8 @@ int main(int argc, char *argv[])
                         std::cerr << "Failed to remove entry: " << s << ": ";
                         if (result == Result::PeselNotFound)
                             std::cerr << "Pesel not found in the bank\n";
+                        else if (result == Result::InvalidPesel)
+                            std::cerr << "Invalid pesel format\n";
                         else
                             std::cerr << "Unexpected error\n";
                     }
