@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
 
         std::cout << list << '\n';
 
-        std::string s;
+        std::string choice;
         std::cout << "Would you like to edit the list [y/n]?: ";
-        std::getline(std::cin, s);
+        std::getline(std::cin, choice);
 
-        if (s == "y")
+        if (choice == "y")
         {
             auto print_menu = []() {
                 std::cout << "[q] Quit\n" <<
@@ -51,52 +51,52 @@ int main(int argc, char *argv[])
             bool quit{ false };
             do {
                 std::cout << "Enter the option: ";
-                std::getline(std::cin, s);
+                std::getline(std::cin, choice);
 
-                if (s == "q")
+                if (choice == "q")
                 {
                     quit = true;
                 }
-                else if (s == "h")
+                else if (choice == "h")
                 {
                     print_menu();
                 }
-                else if (s == "p")
+                else if (choice == "p")
                 {
                     std::cout << list << '\n';
                 }
-                else if (s == "i")
+                else if (choice == "i")
                 {
                     decltype(list)::NodeIDType value;
                     decltype(list)::NodeIDType after;
                     
                     std::cout << "Enter value to insert: ";
-                    std::getline(std::cin, s);
-                    if (std::istringstream{s} >> value)
+                    std::getline(std::cin, choice);
+                    if (std::istringstream{choice} >> value)
                     {
                         std::cout << "Enter value to insert AFTER: ";
-                        std::getline(std::cin, s);
-                        if (std::istringstream{s} >> after)
+                        std::getline(std::cin, choice);
+                        if (std::istringstream{choice} >> after)
                         {
                             auto node = list.insert_after(after, value);
                             std::cout << "Successfully inserted new node: " << node << '\n';
                         }
                         else
                         {
-                            std::cerr << "Invalid format: " << s << '\n';
+                            std::cerr << "Invalid format: " << choice << '\n';
                         }
                     }
                     else
                     {
-                        std::cerr << "Invalid format: " << s << '\n';
+                        std::cerr << "Invalid format: " << choice << '\n';
                     }
                 }
-                else if (s == "r")
+                else if (choice == "r")
                 {
                     decltype(list)::NodeIDType value;
                     std::cout << "Enter value to remove: "; 
-                    std::getline(std::cin, s);
-                    if (std::istringstream{s} >> value)
+                    std::getline(std::cin, choice);
+                    if (std::istringstream{choice} >> value)
                     {
                         using Result = decltype(list)::RemoveResultType;
                         Result result = list.remove(value);
@@ -111,16 +111,37 @@ int main(int argc, char *argv[])
                     }
                     else
                     {
-                        std::cerr << "Invalid format for value: " << s << '\n';
+                        std::cerr << "Invalid format for value: " << choice << '\n';
                     }
                 }
-                else if (s == "s")
+                else if (choice == "s")
                 {
-                    std::cout << "Sorting...\n";
-                    list.sort();
+                    if (list.length() > List<int>::SortThreshold)
+                    {
+                        std::cout << "\tWarning: List has " << list.length() << " nodes. Sorting list with over " << List<int>::SortThreshold << " nodes may be slow.\n";
+                        std::cout << "\tDo you wish to proceed (y/n)? ";
+                        std::string answer;
+                        std::getline(std::cin, answer);
+                        if (answer != "y")
+                        {
+                            std::cout << "Aborting sort...\n";
+                        }
+                        else
+                        {
+                            // TODO: duplicate code
+                            std::cout << "Sorting...\n";
+                            list.sort();
+                        }
+                    }
+                    else
+                    {
+                        // TODO: duplicate code
+                        std::cout << "Sorting...\n";
+                        list.sort();
+                    }
                     std::cout << "done.\n";
                 }
-                else if (s == "save")
+                else if (choice == "save")
                 {
                     std::cout << "Saving to file " << filename << "...\n";
                     std::ofstream ofile{ filename.data() };
