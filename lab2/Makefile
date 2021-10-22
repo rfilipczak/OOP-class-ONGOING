@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -std=c++17 -pedantic -Wall -Wextra
+CFLAGS = -std=c++17 -pedantic -Wall -Wextra -O3
 
 COMPLEX_DIR = ./Complex
 LIST_DIR = ./List
