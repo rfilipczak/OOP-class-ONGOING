@@ -308,27 +308,30 @@ public:
         return node;
     }
 
-    static inline constexpr int SortThreshold = 1000;
+    static inline constexpr int SortThreshold = 10000;
 
     const List& sort()
     {
-
-        // TODO: ridiculously bad time complexity
-        //
-        // hacked "standard" bubble sort for arrays into linked list with get_node_at() 
-        // which iterates over the list every inner loop
-
         if (is_empty())
             return *this;
-        
+
         int len = m_length;
+
+        std::vector<Node*> nodes;
+        nodes.reserve(static_cast<std::size_t>(len));
+        Node* node = m_head;
+        for (int i = 0; i < len; ++i)
+        {
+            nodes.emplace_back(node);
+            node = node->next;
+        }
         
         for (int i = 0; i < len - 1; ++i)
         {
             for (int j = 0; j < len - i - 1; ++j)
             {
-                Node *a = get_node_at(j);
-                Node *b = a->next;
+                Node* a = nodes.at(static_cast<std::size_t>(j));
+                Node* b = a->next;
 
                 assert(a != nullptr);
                 assert(b != nullptr);
