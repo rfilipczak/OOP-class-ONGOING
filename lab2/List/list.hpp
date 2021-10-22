@@ -105,25 +105,6 @@ private:
         return result; // found node in the list or nullptr
     }
 
-    Node *get_node_at(int index)
-    {
-        assert(index >= 0);
-
-        if (is_empty())
-            return nullptr;
-        
-        Node *node = m_head;
-        int current_index = 0;
-        do {
-            if (current_index == index)
-                return node;
-            ++current_index;
-            node = node->next;
-        } while (node != nullptr);
-
-        return nullptr;
-    }
-
     void swap_id(Node *a, Node *b)
     {
         assert(a != nullptr);
