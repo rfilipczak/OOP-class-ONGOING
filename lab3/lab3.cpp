@@ -31,18 +31,24 @@ template <class T>
 class ObjCounter
 {
 private:
+    static inline int totalConstructed{0};
+    static inline int totalDestructed{0};
     static inline int objCount{0};
 protected:
     ObjCounter()
     {
         ++objCount;
+        ++totalConstructed;
     }
     ~ObjCounter()
     {
         --objCount;
+        ++totalDestructed;
     }
 public:
     static int getObjCount() { return objCount; }
+    static int getTotalConstructed() { return totalConstructed; }
+    static int getTotalDestructed() { return totalDestructed; }
 };
 
 class Vector: public ObjCounter<Vector>
@@ -63,11 +69,9 @@ public:
     {
     }
 
-    Vector(const Vector&&) = delete;
-
     ~Vector()
     {
-        std::cout << "Dekonstruktor obiektu Vector\n";
+        std::cout << "Destruktor obiektu Vector\n";
     }
 
     friend Vector operator+(const Vector& a, const Vector& b)
@@ -105,7 +109,7 @@ public:
     {
         setInt(0);
         setChar('a');
-        std::cout << "Konstruktor domyslny, domyslne wartosci: " << "i:" << getInt() << " c:" << getChar() << " f:" << getF() << " s:" << getS() << '\n';
+        std::cout << "Konstruktor domyslny, domyslne wartosci: " << "i=" << getInt() << " c=" << getChar() << " f=" << getF() << " s=" << getS() << '\n';
     }
     
     S(int i, char c)
@@ -149,17 +153,18 @@ int main()
     std::cout << "Hello lab3\n\n";
     
     {
-        Vector vec0 = Vector({-1,123}, {123,123});
-        Vector vec{{0,0}, {1,1}};
+        Vector vec1{{0,0}, {1,1}};
         Vector vec2({-21,32}, {31,33});
 
-        std::cout << vec << " + " << vec2 << " = " << vec + vec2 << '\n';
-        std::cout << vec << " - " << vec2 << " = " << vec - vec2 << '\n';
-        std::cout << vec << " dot product " << vec2 << " = " << vec.dotProduct(vec2) << '\n';
+        std::cout << vec1 << " + " << vec2 << " = " << vec1 + vec2 << '\n';
+        std::cout << vec1 << " - " << vec2 << " = " << vec1 - vec2 << '\n';
+        std::cout << vec1 << " dot product " << vec2 << " = " << vec1.dotProduct(vec2) << '\n';
 
-        std::cout << "\nIlosc obiektow typu Vector: " << Vector::getObjCount() << "\n\n";
+        std::cout << "\nIlosc istniejacych obiektow typu Vector: " << Vector::getObjCount() << "\n\n";
     }
-    std::cout << "\nIlosc obiektow typu Vector: " << Vector::getObjCount() << "\n\n";
+    std::cout << "\nIlosc istniejacych obiektow typu Vector: " << Vector::getObjCount() << '\n';
+    std::cout << "Ilosc utworzonych obiektow typu Vector: " << Vector::getTotalConstructed() << '\n';
+    std::cout << "Ilosc usunietych obiektow typu Vector: " << Vector::getTotalDestructed() << "\n\n";
 
     S s1;
     std::cout << "Obiekt z domyslnego konstruktora: " << s1 << "\n\n";
