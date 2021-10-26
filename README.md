@@ -14,6 +14,7 @@ Object Oriented Programming Labs
 
 * Lab1: factorial, primes, circular doubly-linked list
 * Lab2: complex numbers, linked list, personal data class
+* Lab3: Vector class with +, -, dot product operations; S class showing various object constructors
 
 ## Quick Start
 ```console
