@@ -1,3 +1,6 @@
+* Vector class with +, -, dot product operations
+* S class showing various object constructors
+
 ## Requirements
 
 * g++
