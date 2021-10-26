@@ -1,12 +1,13 @@
+EXECUTABLE = ./prog
+SOURCE = ./lab3.cpp
 CC = g++
-CFLAGS = -g -std=c++2a -pedantic -Wall -Wextra -O0
-
+CFLAGS = -std=c++17 -pedantic -Wall -Wextra -O3
 
 all:
-	$(CC) $(CFLAGS) ./main.cpp -o ./prog
+	$(CC) $(CFLAGS) $(SOURCE) -o $(EXECUTABLE)
 
 clean:
-	rm -rf ./prog
+	rm -rf $(EXECUTABLE)
 
 
 .PHONY: clean
