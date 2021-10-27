@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "./point.hpp"
-#include "./objCounter.hpp"
+#include "./Point.hpp"
+#include "./ObjCounter.hpp"
 
 class Vector: public ObjCounter<Vector>
 {

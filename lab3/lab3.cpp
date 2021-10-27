@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "./vector.hpp"
-#include "./Sclass.hpp"
+#include "./Vector.hpp"
+#include "./S.hpp"
 
 int main()
 {
