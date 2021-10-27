@@ -18,7 +18,7 @@ Object Oriented Programming Labs
 
 ## Quick Start
 ```console
-$ git clone https://github.com/rfilipczak/PO1.git
+$ git clone https://github.com/rfilipczak/OOP-class-ONGOING.git
 $ cd to an apprioprate lab
 $ make
 (read specific instructions for each lab)
