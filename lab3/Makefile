@@ -1,6 +1,6 @@
 EXECUTABLE = ./prog
 SOURCE = ./lab3.cpp
-INCLUDE = ./point.hpp ./objCounter.hpp ./vector.hpp ./Sclass.hpp
+INCLUDE = ./Point.hpp ./ObjCounter.hpp ./Vector.hpp ./S.hpp
 CC = g++
 CFLAGS = -std=c++17 -pedantic -Wall -Wextra -O3
 
