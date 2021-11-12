@@ -5,4 +5,5 @@
 **/complex
 **/list
 **/personal
-**/test*
+**/build*
+**/CMakeLists.txt
