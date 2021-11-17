@@ -13,12 +13,12 @@ public:
     {
     }
 
-    Resistor(double _resistance)
+    explicit Resistor(double _resistance)
         : resistance{_resistance}
     {
     }
     
-    double r() const { return resistance; }
+    [[nodiscard]] double r() const { return resistance; }
     void r(double _resistance) { resistance = _resistance; }
 
     friend Resistor operator+(const Resistor& a, const Resistor& b)
