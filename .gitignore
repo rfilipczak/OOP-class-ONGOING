@@ -8,4 +8,5 @@
 **/build*
 **/CMakeLists.txt
 **/employee
-*/resistor
+**/resistor
+**/person
