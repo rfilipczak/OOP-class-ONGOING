@@ -1,6 +1,6 @@
 # OOP Lab
 
-Object Oriented Programming Labs
+Object Oriented Programming Lab
 
 ## Supported platforms
 
@@ -15,6 +15,7 @@ Object Oriented Programming Labs
 * Lab1: factorial, primes, circular doubly-linked list
 * Lab2: complex numbers, linked list, personal data class
 * Lab3: Vector class with +, -, dot product operations; S class showing various object constructors
+* Lab4: virtual methods and operator overloading
 
 ## Quick Start
 ```console
