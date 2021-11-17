@@ -13,6 +13,7 @@
 
 ```console
 $ make
-$ ./Employee
-$ ./Resistor
+$ ./employee
+$ ./person
+$ ./resistor
 ```
