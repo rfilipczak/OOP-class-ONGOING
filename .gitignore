@@ -10,3 +10,6 @@
 **/employee
 **/resistor
 **/person
+**/cmake-build-debug
+**/.idea
+
