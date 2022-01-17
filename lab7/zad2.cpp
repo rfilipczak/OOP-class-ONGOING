@@ -11,33 +11,40 @@ int main()
     if (choice != 'r' && choice != 'z')
     {
         std::cerr << "Nieprawidlowa opcja\n";
-        return 1;
+        return 0;
     }
 
     try
     {
+        std::cout << "Podaj a, b, c: ";
+        double a, b, c;
+        std::cin >> std::ws >> a >> std::ws >> b >> std::ws >> c;
+
+        if (!std::cin.good())
+        {
+            throw "nieprawidlowe dane";
+        }
+
+        if (a == 0)
+            throw "dzielenie przez zero";
+
+        double delta = b * b - 4 * a * c;
+
         switch (choice)
         {
             case 'r': {
-                std::cout << "Podaj a, b, c: ";
-                double a, b, c;
-                std::cin >> std::ws >> a >> std::ws >> b >> std::ws >> c;
-                double delta = b * b - 4 * a * c;
+                
                 if (delta < 0)
                 {
                     throw "delta ujemna";
                 }
                 else if (delta == 0)
                 {
-                    if (a == 0)
-                        throw "dzielenie przez zero";
                     double pierwiastek = (-1.0) * b / (2 * a);
                     std::cout << "Pierwiastek: " << pierwiastek;
                 }
                 else
                 {
-                    if (a == 0)
-                        throw "dzielenie przez zero";
                     double p1 = ( (-1.0) * b - std::sqrt(delta) ) / (2 * a);
                     double p2 = ( (-1.0) * b + std::sqrt(delta) ) / (2 * a);
                     std::cout << "P1: " << p1 << '\n'
@@ -46,11 +53,27 @@ int main()
             } break;
 
             case 'z': {
-                std::cout << "Podaj a, b, c: ";
-                std::complex<double> a, b, c;
-                std::cin >> std::ws >> a >> std::ws >> b >> std::ws >> c;
-                auto delta = b * b - std::complex<double>(4, 0) * a * c;
-                std::cout << delta << '\n';
+                if (delta < 0)
+                {
+                    std::complex p1 { (-1.0) * b / (2 * a), (-1.0) * std::sqrt((-1.0) * delta) / (2 * a) };
+                    std::complex p2 { (-1.0) * b / (2 * a), (+1.0) * std::sqrt((-1.0) * delta) / (2 * a) };
+
+                    std::cout << "P1: " << p1 << '\n'
+                            << "P2: " << p2 << '\n';
+                }
+                else if (delta == 0)
+                {
+                    std::complex pierwiastek {(-1.0) * b / (2 * a), 0.0};
+                    std::cout << "Pierwiastek: " <<  pierwiastek;
+                }
+                else
+                {
+                    std::complex p1 {( (-1.0) * b - std::sqrt(delta) ) / (2 * a), 0.0};
+                    std::complex p2 {( (-1.0) * b + std::sqrt(delta) ) / (2 * a), 0.0};
+                    std::cout << "P1: " << p1 << '\n'
+                            << "P2: " << p2 << '\n';
+                }
+                
             } break;
         }
     }
@@ -59,7 +82,5 @@ int main()
         std::cerr << e << '\n';
     }
     
-    
-
     return 0;
 }
