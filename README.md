@@ -16,6 +16,11 @@ Object Oriented Programming Lab
 * Lab2: complex numbers, linked list, personal data class
 * Lab3: Vector class with +, -, dot product operations; S class showing various object constructors
 * Lab4: virtual methods and operator overloading
+* Lab5: virtual methods and inheritance
+* Lab6: templates
+* Lab7: exceptions
+* Lab8: friend functions
+* Lab9: STL
 
 ## Quick Start
 ```console
