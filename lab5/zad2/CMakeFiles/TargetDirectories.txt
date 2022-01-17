@@ -1,0 +1,3 @@
+/home/mudcrab/edu/po1/lab/lab5/zad2/CMakeFiles/rebuild_cache.dir
+/home/mudcrab/edu/po1/lab/lab5/zad2/CMakeFiles/edit_cache.dir
+/home/mudcrab/edu/po1/lab/lab5/zad2/CMakeFiles/zad2.dir
