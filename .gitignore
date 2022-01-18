@@ -15,4 +15,7 @@
 lab9/zad1/zad1
 lab9/zad2/zad2
 lab9/zad_extra/zadanie_extra
-
+**/CMakeFiles/
+**/CMakeCache.txt 
+**/cmake_install.cmake
+**/.idea/
